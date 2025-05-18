@@ -1,0 +1,6 @@
+{
+ "email": "YOUR_EMAIL", 
+ "password": "YOUR_PASSWORD",
+ "cvv": "123",
+ "card_number": "NOT_NEEDED"
+}
