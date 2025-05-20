@@ -14,6 +14,7 @@ import atexit
 
 
 def buy():
+ 
  global bought, error, connected
  
  # Database init 
@@ -87,7 +88,7 @@ def buy():
     
      button = WebDriverWait(driver, 10).until(
      EC.element_to_be_clickable((By.XPATH, "//*[@id='modal-intermediary']/div/div/div/div[4]/button[1]"))
- )
+      )
      button.click()
    
     except Exception as e:
@@ -163,8 +164,8 @@ def buy():
      return
     
     except Exception:
-     print("Nothing was bought, waiting...")
-     return
+     print("Looking for an other one ...")
+     continue
    ### This part in the event of card needing an update , then loads the iframe 
    ### Shouldn't happen if a new card has been entered recently 
   
