@@ -1,9 +1,9 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+import requests
 import re
 from bs4 import BeautifulSoup
 import sqlite3
 import yaml
+#import cProfile
 
 # Input part , spacing is important
 def fetch():
@@ -54,32 +54,13 @@ def fetch():
 
  def add_to_db():
   
-  chrome_options = Options()
-  chrome_options.add_argument("--headless=new")
-  chrome_options.add_argument("--disable-crash-reporter")
-  chrome_options.add_argument("--disable-logging")
-  chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
-
-  chrome_options.add_argument("--disable-in-process-stack-traces")
-
-  chrome_options.add_argument("--disable-dev-shm-usage")
-  chrome_options.add_argument("--log-level=3")
-  chrome_options.add_argument("--output=/dev/null")
-  
   page = 1
   while page <= int(n):             #Retreives n pages
  
-       with webdriver.Chrome(options=chrome_options) as driver:
-
+       with requests.get(f'https://www.newegg.ca/p/pl?N=100006663&page={page}') as response:
       
-        driver.get(f'https://www.newegg.ca/p/pl?N=100006663&page={page}')
-      
-
-        # Switch to the new tab
-      
-        page_source = driver.page_source
     
-        soup = BeautifulSoup(page_source, 'html.parser')
+        soup = BeautifulSoup(response.text, 'html.parser')
         anchors = soup('a')
     
         for anchor in anchors:
@@ -138,11 +119,11 @@ def fetch():
   
   conn.close()
   
- add_to_db()
+ add_to_db() #21.24s
 
 
 
-
+#cProfile.run("fetch()")
 
 
 
