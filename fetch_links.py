@@ -5,7 +5,8 @@ import sqlite3
 import yaml
 #import cProfile
 
-# Input part , spacing is important
+# Input part 
+
 def fetch():
  try:
    with open("parameters.txt", "r") as params:
@@ -116,11 +117,10 @@ def fetch():
       
         page += 1
  
-  
+  cursor.close()
   conn.close()
   
- add_to_db() #21.24s
-
+ add_to_db() # was 21.24s now 2.34s
 
 
 #cProfile.run("fetch()")
