@@ -50,19 +50,6 @@ def buy():
  except IndexError:
   qty2 = int(quantity[0])"""
 
-
- ## Will run in headless mode 
- chrome_options = Options()
- #chrome_options.add_argument("--headless=new")  # comment to disable
- chrome_options.add_argument("--disable-crash-reporter")
- chrome_options.add_argument("--disable-logging")
- chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
-
- chrome_options.add_argument("--disable-in-process-stack-traces")
-
- chrome_options.add_argument("--disable-dev-shm-usage")
- chrome_options.add_argument("--log-level=3")
- chrome_options.add_argument("--output=/dev/null")
  
  with open("account.txt", "r") as credentials:
   
@@ -73,7 +60,6 @@ def buy():
   card_number = data["card_number"]
 
 ## Add to cart and skips warranty , skips if not in stock 
- with webdriver.Chrome(options=chrome_options) as driver:
   
   for link in all_links:#[qty1 -1:qty2]:
     url = link[0]
@@ -116,6 +102,7 @@ def buy():
   
     
     if connected == 0:
+     
      try:
       time.sleep(2)
       email_input = driver.find_element(By.ID, "labeled-input-signEmail")
@@ -152,11 +139,11 @@ def buy():
      for digit in cvv:
       cvv_input.send_keys(digit)
       time.sleep(0.5)
-  
+     
      address_btn = driver.find_element(By.CLASS_NAME, "checkout-step-action-done")
      address_btn.click()
      time.sleep(1)
-  
+     
      confirm_order_button = driver.find_element(By.CLASS_NAME, "bg-orange")
      confirm_order_button.click()
      print("A GPU was bought, program exiting")
@@ -184,7 +171,7 @@ def buy():
     last.click()"""
   ## IF nothing was bought 
   
-  print("Nothing was found in stock matching your criterias")
+  print("Nothing was bought")
   print("Waiting...")
   
   
@@ -198,6 +185,20 @@ def delete():
 atexit.register(delete)
 
 ## Main program
+
+## Will run in headless mode 
+chrome_options = Options()
+chrome_options.add_argument("--headless=new")  # comment to disable
+chrome_options.add_argument("--disable-crash-reporter")
+chrome_options.add_argument("--disable-logging")
+chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
+chrome_options.add_experimental_option("detach", True)
+chrome_options.add_argument("--disable-in-process-stack-traces")
+chrome_options.add_argument("--disable-dev-shm-usage")
+chrome_options.add_argument("--log-level=3")
+chrome_options.add_argument("--output=/dev/null")
+
+driver = webdriver.Chrome(options=chrome_options)
 
 connected = 0
 bought = 0
@@ -215,6 +216,7 @@ while True:
   if error == 1:
    delete()
    os._exit(0)
+ 
   else:
    time.sleep(300)
 
