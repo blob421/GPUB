@@ -15,7 +15,7 @@ Instructions :
     your browser afterwards.
  
  4. Launch run.bat or buyer.py . The program will ask for 
-    the number of pages to scour : I recommend 3-4 . The lower the faster .
+    the number of pages to scour: I recommend 3-4 . The lower the faster .
 
  5. When the program asks for a model of graphics card, the spacing is important. Eg: tuf 5070 ti,
     5070 ti super , xfx 6700 xt , TUF 5080 , 6800
