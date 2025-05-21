@@ -212,7 +212,7 @@ chrome_options.add_argument("--disable-in-process-stack-traces")
 chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--log-level=3")
 chrome_options.add_argument("--output=/dev/null")
-
+chrome_options.add_argument("--blink-settings=imagesEnabled=false")
 driver = webdriver.Chrome(options=chrome_options)
 
 connected = 0
