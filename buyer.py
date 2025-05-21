@@ -140,9 +140,13 @@ def buy():
       cvv_input.send_keys(digit)
       time.sleep(0.5)
      
-     address_btn = driver.find_element(By.CLASS_NAME, "checkout-step-action-done")
-     address_btn.click()
-     time.sleep(1)
+     try:
+      address_btn = driver.find_element(By.CLASS_NAME, "checkout-step-action-done")
+      address_btn.click()
+      time.sleep(1)
+     
+     except:
+      pass
      
      confirm_order_button = driver.find_element(By.CLASS_NAME, "bg-orange")
      confirm_order_button.click()
