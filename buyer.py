@@ -67,10 +67,11 @@ def buy():
 
     try:
     
-     add_to_cart = driver.find_element(By.CLASS_NAME, "btn-wide")
+     add_to_cart = WebDriverWait(driver, 10).until(
+     EC.element_to_be_clickable((By.CLASS_NAME, "btn-wide")))
      add_to_cart.click()
     
-     WebDriverWait(driver, 2)
+     
     
      button = WebDriverWait(driver, 10).until(
      EC.element_to_be_clickable((By.XPATH, "//*[@id='modal-intermediary']/div/div/div/div[4]/button[1]"))
@@ -87,9 +88,10 @@ def buy():
    
      driver.get("https://secure.newegg.ca/shop/cart")
 
-     WebDriverWait(driver, 2)
+     
 
-     buy_button = driver.find_element(By.CLASS_NAME, "btn-wide")
+     buy_button =WebDriverWait(driver, 10).until(
+     EC.element_to_be_clickable((By.CLASS_NAME, "btn-wide")))
      buy_button.click()
   
      
@@ -104,18 +106,20 @@ def buy():
     if connected == 0:
      
      try:
-      time.sleep(2)
+      time.sleep(1)
       email_input = driver.find_element(By.ID, "labeled-input-signEmail")
       email_input.send_keys(email)
   
-      refresh_button = driver.find_element(By.CLASS_NAME, "btn-orange")
+      refresh_button = WebDriverWait(driver, 10).until(
+      EC.element_to_be_clickable((By.CLASS_NAME, "btn-orange")))
       refresh_button.click()
-      time.sleep(2)
+      time.sleep(1)
     
       email_input = driver.find_element(By.ID, "labeled-input-password")
       email_input.send_keys(password)
   
-      refresh_button = driver.find_element(By.CLASS_NAME, "btn-orange")
+      refresh_button = WebDriverWait(driver, 10).until(
+      EC.element_to_be_clickable((By.CLASS_NAME, "btn-orange")))
       refresh_button.click()
      
      except Exception:
@@ -125,15 +129,17 @@ def buy():
     
     if connected == 0:
       time.sleep(1)
-      address_btn = driver.find_element(By.CLASS_NAME, "checkout-step-action-done")
+      address_btn = WebDriverWait(driver, 10).until(
+      EC.element_to_be_clickable((By.CLASS_NAME, "checkout-step-action-done")))
       address_btn.click()
       connected = 1
 
     try:
      connected = 1
-     time.sleep(1)
+     time.sleep(2)
  
-     cvv_input = driver.find_element(By.NAME, "cvvNumber")
+     cvv_input = WebDriverWait(driver, 10).until(
+     EC.element_to_be_clickable((By.NAME, "cvvNumber")))
      cvv_input.click()
   
      for digit in cvv:
@@ -141,14 +147,16 @@ def buy():
       time.sleep(0.5)
      
      try:
-      address_btn = driver.find_element(By.CLASS_NAME, "checkout-step-action-done")
+      address_btn = WebDriverWait(driver, 10).until(
+      EC.element_to_be_clickable((By.CLASS_NAME, "checkout-step-action-done")))
       address_btn.click()
       time.sleep(1)
      
      except:
       pass
      
-     confirm_order_button = driver.find_element(By.CLASS_NAME, "bg-orange")
+     confirm_order_button = WebDriverWait(driver, 10).until(
+     EC.element_to_be_clickable((By.CLASS_NAME, "bg-orange")))
      confirm_order_button.click()
      print("A GPU was bought, program exiting")
      bought = 1
@@ -185,7 +193,10 @@ def buy():
 def delete():
   if os.path.exists("parameters.txt"):
    os.remove("parameters.txt")
-  
+   
+   
+
+
 atexit.register(delete)
 
 ## Main program
