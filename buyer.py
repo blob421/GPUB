@@ -191,6 +191,8 @@ def buy():
 ## Deletes parameters.txt when exiting 
 
 def delete():
+  driver.quit()
+  os.system("taskkill /f /im chrome.exe")  
   if os.path.exists("parameters.txt"):
    os.remove("parameters.txt")
    
