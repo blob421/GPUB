@@ -9,7 +9,7 @@ GPUB documentation
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-   
+   gpub
    modules
 
 Indices and tables
