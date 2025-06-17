@@ -38,16 +38,18 @@ This program requires Python.
 
 Starting GPUB
 ---------------
-- 1. Launch run.bat or buyer.py . The program will ask for the number of pages to scan, I recommend 3-4 . The lower the faster .
+- 1. Launch run.bat or buyer.py. 
 
-- 2. The program will asks for a GPU model, the spacing is important. E.g.: 
+- 2. The program will ask for the number of pages to scan, 3-4 is recommended. Input a number 
+     and press enter.
 
+- 3. The program will asks for a GPU model, the spacing is important. E.g.: 
     - tuf 5070 ti 
     - 5070 ti super 
     - xfx 6700 xt  
     - TUF 5080 ,
     - 6800
 
-- 3. When the bot finds an in-stock GPU, it will display its price and attempt to purchase the 
+- 4. When the bot finds an in-stock GPU, it will display its price and attempt to purchase the 
      first one available. If someone was quicker , it'll try the other ones.
  
