@@ -12,7 +12,7 @@ from fetch_links import fetch
 from stock_checker import checker
 import atexit
 
-
+user_data_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "chrome_profile"))
 
 def buy():
  """
@@ -260,6 +260,7 @@ chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--log-level=3")
 chrome_options.add_argument("--output=/dev/null")
 chrome_options.add_argument("--blink-settings=imagesEnabled=false")
+chrome_options.add_argument(f"--user-data-dir={user_data_path}")
 driver = webdriver.Chrome(options=chrome_options)
 
 connected = 0
