@@ -29,24 +29,23 @@ in your python environment before proceeding.
 
 With your python environment activated in the terminal:
 
-1. Navigate to the directory where `requirements.txt` is located. 
+- 1. Navigate to the directory where `requirements.txt` is located. 
    e.g. cd /desktop/project
 
-2. pip install -r requirements.txt 
+- 2. pip install -r requirements.txt 
 
 
 Starting GPUB
 ---------------
-1. Launch run.bat or buyer.py . The program will ask for the number of pages to scan,
-   I recommend 3-4 . The lower the faster .
+- 1. Launch run.bat or buyer.py . The program will ask for the number of pages to scan, I recommend 3-4 . The lower the faster .
 
-2. The program will asks for a GPU model, the spacing is important. E.g.: 
-- tuf 5070 ti 
-- 5070 ti super 
-- xfx 6700 xt  
-- TUF 5080 ,
-- 6800
+- 2. The program will asks for a GPU model, the spacing is important. E.g.: 
+    - tuf 5070 ti 
+    - 5070 ti super 
+    - xfx 6700 xt  
+    - TUF 5080 ,
+    - 6800
 
-3. When the bot finds an in-stock GPU, it will display its price and attempt to purchase the 
-first one available. If someone was quicker , it'll try the other ones.
+- 3. When the bot finds an in-stock GPU, it will display its price and attempt to purchase the 
+     first one available. If someone was quicker , it'll try the other ones.
  

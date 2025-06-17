@@ -6,7 +6,7 @@ GPUB: Fast & Automated GPU Purchasing Bot
 GPUB is a high-speed Python-based bot designed to automate the purchase of GPUs on Newegg.ca. 
 Using Selenium WebDriver, GPUB efficiently scans product listings, checks for
 availability, and executes purchases automatically—ensuring you secure the GPU you want before
-stock runs out.
+it runs out of stock.
 
 Key Features
 --------------
@@ -23,31 +23,30 @@ Key Features
 How It Works
 -------------
 
-1. Retrieves Search Parameters: GPUB loads user-defined search criteria (GPU model and pages to scan) from parameters.txt.
+- 1. Retrieves Search Parameters: GPUB loads user-defined search criteria (GPU model and pages to scan) from parameters.txt.
 
-2. Asynchronous Scraping:
+- 2. Asynchronous Scraping:
 
-GPUB launches multiple scraping tasks concurrently using Python's asyncio.
+      - GPUB launches multiple scraping tasks concurrently using Python's asyncio.
 
-Each task fetches a product listing from Newegg, ensuring rapid data collection.
+      - Each task fetches a product listing from Newegg, ensuring rapid data collection.
 
-3. Efficient Database Storage (aiosqlite)
+- 3. Efficient Database Storage (aiosqlite)
 
-GPUB leverages aiosqlite, an asynchronous SQLite wrapper, to store and update GPU links without blocking execution.
+      - GPUB leverages aiosqlite, an asynchronous SQLite wrapper, to store and update GPU links without blocking execution. 
+     This allows simultaneous web scraping while writing to the database, minimizing delays.
 
-This allows simultaneous web scraping while writing to the database, minimizing delays.
+- 4. Inventory Checking:
 
-4. Inventory Checking:
+      - Extracts relevant product links using BeautifulSoup.
 
-Extracts relevant product links using BeautifulSoup.
+      - Applies keyword filtering to match user-defined GPU models.
 
-Applies keyword filtering to match user-defined GPU models.
+- 5. Rapid Purchase Execution:
 
-5. Rapid Purchase Execution:
+      - If a matching GPU is in stock, GPUB immediately starts the checkout process.
 
-If a matching GPU is in stock, GPUB immediately starts the checkout process.
-
-Ensures fast transaction handling via Selenium WebDriver for automated form completion.
+      - Ensures fast transaction handling via Selenium WebDriver for automated form completion.
 
 
 
