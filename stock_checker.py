@@ -5,8 +5,51 @@ import sqlite3
 import re
 
 def checker():
+ """
+    Wrapper function that initializes a stock-checking process for stored product links by
+    calling is_in_stock().
+    
+    This function connects to a SQLite database, retrieves product URLs, and determines 
+    stock availability using Selenium WebDriver and BeautifulSoup. Out-of-stock items 
+    are automatically removed from the database.
+
+    Example Usage:
+        checker()  # Runs inventory check and updates product availability.
+    """
+
  def is_in_stock():
-  
+  """
+    Checks product availability for stored links and updates the database accordingly.
+
+    This function retrieves stored product URLs from a SQLite database, loads each page using 
+    Selenium WebDriver, and parses the content with BeautifulSoup. It verifies stock availability 
+    using structured JSON (`ld+json`) and extracts the product price if available. Out-of-stock 
+    links are removed from the database.
+
+    Returns:
+        None: The function operates directly on stored links in the database.
+
+    Raises:
+        sqlite3.DatabaseError: If database queries fail.
+        selenium.common.exceptions.WebDriverException: If Chrome WebDriver encounters an issue.
+        AttributeError: If the parsed data does not contain expected JSON stock information.
+
+    Process Overview:
+    1. Retrieves stored product URLs from `site.sqlite`.
+    2. Loads each product page using a headless Chrome WebDriver.
+    3. Extracts page content and searches for structured JSON (`ld+json` scripts).
+    4. Determines stock status based on "InStock" keyword presence.
+    5. Displays product price if available.
+    6. Deletes out-of-stock items from the database.
+
+    Note:
+    - The function leverages structured data (`application/ld+json`) for precise stock tracking.
+    - Database entries are modified dynamically based on availability.
+    - Uses optimized Chrome WebDriver settings to improve performance.
+
+    Example Usage:
+        is_in_stock()  # Scans product links and updates stock status.
+  """
   # Database init 
 
   conn = sqlite3.connect("site.sqlite")
@@ -71,11 +114,7 @@ def checker():
     cursor.close()  
     conn.close()           
    
-    #if count == 0:
-     # print("Nothing was found matching your criterias")
       
-       
- 
 
  is_in_stock()
    

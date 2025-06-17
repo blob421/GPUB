@@ -13,8 +13,42 @@ from stock_checker import checker
 import atexit
 
 
+
 def buy():
- 
+ """
+    Automates the purchase of a product from Newegg using Selenium.
+
+    This function connects to a SQLite database to retrieve available product links, 
+    verifies stock availability, and proceeds through the checkout process using Selenium WebDriver. 
+    It handles authentication, adds items to the cart, enters payment details, and attempts to confirm 
+    the order.
+
+    Returns:
+        None: The function modifies the database and interacts with the web interface, but does not return a value.
+
+    Raises:
+        sqlite3.DatabaseError: If database queries fail.
+        selenium.common.exceptions.TimeoutException: If an element fails to load within the expected time.
+        selenium.common.exceptions.WebDriverException: If the Chrome WebDriver encounters an issue.
+        json.JSONDecodeError: If `account.txt` contains malformed JSON.
+
+    Process Overview:
+    1. Connects to `site.sqlite` and retrieves stored product links.
+    2. Checks for availability and skips items that are out of stock.
+    3. Uses Selenium to navigate to the product page and add items to the cart.
+    4. Handles login authentication using stored credentials (`account.txt`).
+    5. Proceeds through the checkout process, entering CVV and confirming the order.
+    6. Removes out-of-stock items from the database.
+
+    Note:
+    - Requires Chrome WebDriver with appropriate configurations (`--headless`, `--disable-logging`, etc.).
+    - Assumes user credentials (`email`, `password`, `cvv`, `card_number`) are stored in `account.txt`.
+    - Filtering logic ensures only relevant and available products are purchased.
+
+    Example Usage:
+        buy()  # Executes the automated purchasing process.
+ """
+
  global bought, error, connected
  
  # Database init 
@@ -191,8 +225,18 @@ def buy():
 ## Deletes parameters.txt when exiting 
 
 def delete():
+  """
+    Closes the Selenium WebDriver, terminates all Chrome processes, and deletes stored parameters.
+
+    This function ensures a clean shutdown of browser automation by quitting the WebDriver 
+    and forcefully terminating all active Chrome processes. Additionally, it removes the 
+    `parameters.txt` file if it exists.
+
+    Example Usage:
+        delete()  # Stops browser automation and cleans up temporary data.
+  """
   driver.quit()
-  os.system("taskkill /f /im chrome.exe")  
+  #os.system("taskkill /f /im chrome.exe")  # disabled for headless-mode
   if os.path.exists("parameters.txt"):
    os.remove("parameters.txt")
    
@@ -220,7 +264,36 @@ driver = webdriver.Chrome(options=chrome_options)
 connected = 0
 bought = 0
 error = 0
-while True:
+
+
+def buy_main():
+ """
+    Continuously executes product retrieval, stock checking, and purchasing automation.
+
+    This function runs an infinite loop that sequentially:
+    1. Fetches product listings from Newegg.
+    2. Checks their stock availability.
+    3. Attempts to purchase available items.
+    4. If a purchase is successful (`bought == 1`), it cleans up and exits.
+    5. If an error occurs (`error == 1`), it performs cleanup and exits.
+    6. Otherwise, it waits 5 minutes before repeating the cycle.
+
+    Returns:
+        None: The function runs indefinitely until a purchase or error triggers exit.
+
+    Raises:
+        SystemExit: If a GPU is successfully bought or an error occurs.
+    
+    Note:
+    - Runs continuously until an item is purchased or an error occurs.
+    - The cleanup process (`delete()`) ensures browser shutdown and removal of temporary files.
+    - Optimized for repeated execution at 5-minute intervals.
+
+    Example Usage:
+        buy_main()  # Initiates automated purchasing loop.
+ """
+ global bought, error
+ while True:
   
   fetch()
   checker()
@@ -237,6 +310,6 @@ while True:
   else:
    time.sleep(300)
 
-  
+buy_main()
   
 

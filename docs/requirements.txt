@@ -1,0 +1,7 @@
+sphinx
+aiohttp
+furo
+selenium
+aiosqlite
+pyyaml
+bs4
