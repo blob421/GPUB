@@ -25,15 +25,15 @@ This program requires Python.
 - Download the latest version of Python and ensure the "Add Python to PATH" option is checked 
   during installation.
 
-Required dependencies are included in requirements.txt and must be installed
-in your python environment before proceeding.
+- Required dependencies are included in requirements.txt and must be installed
+  in your python environment before proceeding.
 
-With your python environment activated in the terminal:
+- With your python environment activated in the terminal:
 
-- 1. Navigate to the directory where `requirements.txt` is located. 
-     e.g. cd /desktop/project
+    - 1. Navigate to the directory where `requirements.txt` is located. 
+         e.g. cd /desktop/project
 
-- 2. pip install -r requirements.txt 
+    - 2. pip install -r requirements.txt 
 
 
 Starting GPUB

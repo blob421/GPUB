@@ -16,14 +16,15 @@ Key Features
 
 - Customizable Search: Users define search parameters, including keywords and number of pages to check.
 
-- Optimized Efficiency: Runs every 5 minutes (adjustable) to stay ahead of market fluctuations.
+- Optimized Efficiency: Runs every 5 minutes (adjustable) to stay ahead.
 
 - Headless Browser Mode: Uses Selenium in headless mode for stealthy and rapid interactions.
 
 How It Works
 -------------
 
-- 1. Retrieves Search Parameters: GPUB loads user-defined search criteria (GPU model and pages to scan) from parameters.txt.
+- 1. Retrieving Search Parameters: 
+      - GPUB loads user-defined search criteria (GPU model and pages to scan) from parameters.txt.
 
 - 2. Asynchronous Scraping:
 
