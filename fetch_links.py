@@ -40,7 +40,7 @@ def fetch():
     - Keywords (`item0`, `item1`, `item2`) are extracted dynamically from the user's input.
     - The function **drops** the `links` table before creating a fresh one.
 
-    Example Usage:
+    Example:
        >>> fetch()  # Loads parameters and initializes the database
     """
  try:
@@ -119,7 +119,7 @@ def fetch():
        - Items (`item0`, `item1`, `item2`) must be defined globally before calling this function.
        - Filtering logic ensures only relevant product links are stored.
 
-    Example Usage:
+    Example:
        >>> await add_to_db(5)  # Scrapes page 5 from Newegg and stores valid links
   """
 
@@ -215,9 +215,9 @@ def fetch():
       - 4. Runs the event loop using `asyncio.run()`.
 
     Note:
-    - The function assumes `num` is a valid integer.
-    - Requires `add_to_db(numb)` to be implemented and working.
-    - Ensures efficient parallel execution to optimize scraping.
+      - The function assumes `num` is a valid integer.
+      - Requires `add_to_db(numb)` to be implemented and working.
+      - Ensures efficient parallel execution to optimize scraping.
 
     Example Usage:
        >>>  asyncio.run(main())  # Runs asynchronous scraping for multiple pages.
