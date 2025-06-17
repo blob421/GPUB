@@ -1,4 +1,4 @@
-fetch\_links module
+fetch\_links
 ===================
 
 .. automodule:: fetch_links

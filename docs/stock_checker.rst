@@ -1,4 +1,4 @@
-stock\_checker module
+stock\_checker
 =====================
 
 .. automodule:: stock_checker

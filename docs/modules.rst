@@ -1,5 +1,5 @@
-GPUB
-====
+Modules
+========
 
 .. toctree::
    :maxdepth: 4

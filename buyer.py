@@ -12,7 +12,6 @@ from fetch_links import fetch
 from stock_checker import checker
 import atexit
 
-user_data_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "chrome_profile"))
 
 def buy():
  """
@@ -33,20 +32,21 @@ def buy():
         json.JSONDecodeError: If `account.txt` contains malformed JSON.
 
     Process Overview:
-    1. Connects to `site.sqlite` and retrieves stored product links.
-    2. Checks for availability and skips items that are out of stock.
-    3. Uses Selenium to navigate to the product page and add items to the cart.
-    4. Handles login authentication using stored credentials (`account.txt`).
-    5. Proceeds through the checkout process, entering CVV and confirming the order.
-    6. Removes out-of-stock items from the database.
+
+       -1. Connects to `site.sqlite` and retrieves stored product links.
+       -2. Checks for availability and skips items that are out of stock.
+       -3. Uses Selenium to navigate to the product page and add items to the cart.
+       -4. Handles login authentication using stored credentials (`account.txt`).
+       -5. Proceeds through the checkout process, entering CVV and confirming the order.
+       -6. Removes out-of-stock items from the database.
 
     Note:
     - Requires Chrome WebDriver with appropriate configurations (`--headless`, `--disable-logging`, etc.).
     - Assumes user credentials (`email`, `password`, `cvv`, `card_number`) are stored in `account.txt`.
     - Filtering logic ensures only relevant and available products are purchased.
 
-    Example Usage:
-        buy()  # Executes the automated purchasing process.
+    Example:
+       >>> buy()  # Executes the automated purchasing process.
  """
 
  global bought, error, connected
@@ -233,7 +233,7 @@ def delete():
     `parameters.txt` file if it exists.
 
     Example Usage:
-        delete()  # Stops browser automation and cleans up temporary data.
+        >>> delete()  # Stops browser automation and cleans up temporary data.
   """
   
   driver.quit()
@@ -260,7 +260,6 @@ chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--log-level=3")
 chrome_options.add_argument("--output=/dev/null")
 chrome_options.add_argument("--blink-settings=imagesEnabled=false")
-chrome_options.add_argument(f"--user-data-dir={user_data_path}")
 driver = webdriver.Chrome(options=chrome_options)
 
 connected = 0

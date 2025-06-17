@@ -14,7 +14,7 @@ def checker():
     are automatically removed from the database.
 
     Example Usage:
-        checker()  # Runs inventory check and updates product availability.
+       >>> checker()  # Runs inventory check and updates product availability.
     """
 
  def is_in_stock():
@@ -35,12 +35,12 @@ def checker():
         AttributeError: If the parsed data does not contain expected JSON stock information.
 
     Process Overview:
-    1. Retrieves stored product URLs from `site.sqlite`.
-    2. Loads each product page using a headless Chrome WebDriver.
-    3. Extracts page content and searches for structured JSON (`ld+json` scripts).
-    4. Determines stock status based on "InStock" keyword presence.
-    5. Displays product price if available.
-    6. Deletes out-of-stock items from the database.
+      - 1. Retrieves stored product URLs from `site.sqlite`.
+      - 2. Loads each product page using a headless Chrome WebDriver.
+      - 3. Extracts page content and searches for structured JSON (`ld+json` scripts).
+      - 4. Determines stock status based on "InStock" keyword presence.
+      - 5. Displays product price if available.
+      - 6. Deletes out-of-stock items from the database.
 
     Note:
     - The function leverages structured data (`application/ld+json`) for precise stock tracking.
@@ -48,7 +48,7 @@ def checker():
     - Uses optimized Chrome WebDriver settings to improve performance.
 
     Example Usage:
-        is_in_stock()  # Scans product links and updates stock status.
+       >>> is_in_stock()  # Scans product links and updates stock status.
   """
   # Database init 
 

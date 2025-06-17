@@ -1,4 +1,4 @@
-buyer module
+buyer
 ============
 
 .. automodule:: buyer

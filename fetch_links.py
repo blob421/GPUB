@@ -28,11 +28,12 @@ def fetch():
         sqlite3.DatabaseError: If there is an issue initializing the database.
 
     Process Overview:
-    1. Attempts to read search parameters (`n`, `item`) from `parameters.txt`.
-    2. If missing, prompts the user to manually enter `n` (pages to search) and `item` (search keywords).
-    3. Extracts up to three keywords (`item0`, `item1`, `item2`) for filtering.
-    4. Initializes a SQLite database (`site.sqlite`).
-    5. Creates or resets the `links` table for storing unique product links.
+
+      - 1. Attempts to read search parameters (`n`, `item`) from `parameters.txt`.
+      - 2. If missing, prompts the user to manually enter `n` (pages to search) and `item` (search keywords).
+      - 3. Extracts up to three keywords (`item0`, `item1`, `item2`) for filtering.
+      - 4. Initializes a SQLite database (`site.sqlite`).
+      - 5. Creates or resets the `links` table for storing unique product links.
 
     Note:
     - `parameters.txt` must be formatted as a YAML dictionary.
@@ -40,7 +41,7 @@ def fetch():
     - The function **drops** the `links` table before creating a fresh one.
 
     Example Usage:
-        fetch()  # Loads parameters and initializes the database
+       >>> fetch()  # Loads parameters and initializes the database
     """
  try:
    with open("parameters.txt", "r") as params:
@@ -106,20 +107,20 @@ def fetch():
         aiosqlite.Error: If there is an issue inserting data into the database.
 
     Process Overview:
-    1. Fetches product listings from Newegg using `aiohttp`.
-    2. Parses the page using `BeautifulSoup` to extract `<a>` elements.
-    3. Filters links based on keywords (`item0`, `item1`, `item2`).
-    4. Ensures exclusions (`ti`, `super`, `xt`) based on user input.
-    5. Checks if links contain unwanted query strings (`#IsFeed`, `?Item=`).
-    6. Inserts the filtered URLs into the SQLite database asynchronously.
+       - 1. Fetches product listings from Newegg using `aiohttp`.
+       - 2. Parses the page using `BeautifulSoup` to extract `<a>` elements.
+       - 3. Filters links based on keywords (`item0`, `item1`, `item2`).
+       - 4. Ensures exclusions (`ti`, `super`, `xt`) based on user input.
+       - 5. Checks if links contain unwanted query strings (`#IsFeed`, `?Item=`).
+       - 6. Inserts the filtered URLs into the SQLite database asynchronously.
 
     Note:
-    - The function assumes `DB_PATH = 'site.sqlite'` as the database location.
-    - Items (`item0`, `item1`, `item2`) must be defined globally before calling this function.
-    - Filtering logic ensures only relevant product links are stored.
+       - The function assumes `DB_PATH = 'site.sqlite'` as the database location.
+       - Items (`item0`, `item1`, `item2`) must be defined globally before calling this function.
+       - Filtering logic ensures only relevant product links are stored.
 
     Example Usage:
-        await add_to_db(5)  # Scrapes page 5 from Newegg and stores valid links
+       >>> await add_to_db(5)  # Scrapes page 5 from Newegg and stores valid links
   """
 
   
@@ -208,10 +209,10 @@ def fetch():
         asyncio.CancelledError: If any task is interrupted before completion.
 
     Process Overview:
-    1. Iterates over a range from `0` to `num` to create scraping tasks.
-    2. Calls `add_to_db(numb)` for each page asynchronously.
-    3. Uses `asyncio.gather()` to execute all tasks concurrently.
-    4. Runs the event loop using `asyncio.run()`.
+      - 1. Iterates over a range from `0` to `num` to create scraping tasks.
+      - 2. Calls `add_to_db(numb)` for each page asynchronously.
+      - 3. Uses `asyncio.gather()` to execute all tasks concurrently.
+      - 4. Runs the event loop using `asyncio.run()`.
 
     Note:
     - The function assumes `num` is a valid integer.
@@ -219,7 +220,7 @@ def fetch():
     - Ensures efficient parallel execution to optimize scraping.
 
     Example Usage:
-        asyncio.run(main())  # Runs asynchronous scraping for multiple pages.
+       >>>  asyncio.run(main())  # Runs asynchronous scraping for multiple pages.
    """
 
 
