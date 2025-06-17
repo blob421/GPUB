@@ -16,7 +16,7 @@ author = 'blob421'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = ['sphinx.ext.autodoc']
-
+autodoc_mock_imports = ["selenium"]
 templates_path = ['_templates']
 exclude_patterns = []
 
