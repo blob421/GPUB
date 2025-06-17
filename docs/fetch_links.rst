@@ -5,5 +5,4 @@ fetch\_links
    :members:
    :show-inheritance:
    :undoc-members:
-   :private-members:
-   :all:
+   
