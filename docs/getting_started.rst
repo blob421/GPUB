@@ -12,6 +12,7 @@ Setting up account.txt
 Before proceeding, you'll need to set up your credentials. 
 In the root folder of the repository, there is a file named account.txt. 
 Edit account.txt to include the following details:
+
  - YOUR_EMAIL: Your Newegg account email  
  - YOUR_PASSWORD: Your Newegg account password  
  - 123: The CVV on the back of your credit card  
@@ -30,7 +31,7 @@ in your python environment before proceeding.
 With your python environment activated in the terminal:
 
 - 1. Navigate to the directory where `requirements.txt` is located. 
-   e.g. cd /desktop/project
+     e.g. cd /desktop/project
 
 - 2. pip install -r requirements.txt 
 
@@ -40,6 +41,7 @@ Starting GPUB
 - 1. Launch run.bat or buyer.py . The program will ask for the number of pages to scan, I recommend 3-4 . The lower the faster .
 
 - 2. The program will asks for a GPU model, the spacing is important. E.g.: 
+
     - tuf 5070 ti 
     - 5070 ti super 
     - xfx 6700 xt  

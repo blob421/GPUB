@@ -34,7 +34,7 @@ How It Works
 - 3. Efficient Database Storage (aiosqlite)
 
       - GPUB leverages aiosqlite, an asynchronous SQLite wrapper, to store and update GPU links without blocking execution. 
-     This allows simultaneous web scraping while writing to the database, minimizing delays.
+        This allows simultaneous web scraping while writing to the database, minimizing delays.
 
 - 4. Inventory Checking:
 
