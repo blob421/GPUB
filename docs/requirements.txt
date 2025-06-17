@@ -5,4 +5,3 @@ selenium
 aiosqlite
 pyyaml
 bs4
-google-chrome-stable
