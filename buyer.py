@@ -280,9 +280,9 @@ def buy_main():
         SystemExit: If a GPU is successfully bought or an error occurs.
     
     Note:
-    - Runs continuously until an item is purchased or an error occurs.
-    - The cleanup process (`delete()`) ensures browser shutdown and removal of temporary files.
-    - Optimized for repeated execution at 5-minute intervals.
+     - Runs continuously until an item is purchased or an error occurs.
+     - The cleanup process (`delete()`) ensures browser shutdown and removal of temporary files.
+     - Optimized for repeated execution at 5-minute intervals.
 
     Example:
        >>> buy_main()  # Initiates automated purchasing loop.

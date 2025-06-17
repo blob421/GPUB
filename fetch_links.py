@@ -27,15 +27,15 @@ def get_parameters():
         KeyError: If expected keys (`n`, `item`) are missing from the parameter file.
 
     Process Overview:
-    1. Attempts to load `n` (number of pages) and `item` (search keywords) from `parameters.txt`.
-    2. If missing, prompts the user to enter search parameters manually.
-    3. Saves user input in a dictionary and writes it to `parameters.txt`.
-    4. Extracts up to three keywords (`word_0`, `word_1`, `word_2`) for filtering.
-    5. Assigns extracted values to global variables.
+     - 1. Attempts to load `n` (number of pages) and `item` (search keywords) from `parameters.txt`.
+     - 2. If missing, prompts the user to enter search parameters manually.
+     - 3. Saves user input in a dictionary and writes it to `parameters.txt`.
+     - 4. Extracts up to three keywords (`word_0`, `word_1`, `word_2`) for filtering.
+     - 5. Assigns extracted values to global variables.
 
     Notes:
-    - `parameters.txt` must be formatted as a YAML dictionary.
-    - If fewer than three keywords are provided, missing values default to `None`.
+     - `parameters.txt` must be formatted as a YAML dictionary.
+     - If fewer than three keywords are provided, missing values default to `None`.
 
     Example Usage:
         >>> get_parameters()  # Loads parameters, initializes global variables
@@ -101,18 +101,18 @@ async def add_to_db(n):
         sqlite3.DatabaseError: If database initialization fails.
 
     Process Overview:
-    1. Connects to a SQLite database (`site.sqlite`) and initializes the `links` table.
-    2. Fetches product listings from Newegg using `aiohttp`.
-    3. Parses the page with `BeautifulSoup` to extract `<a>` elements.
-    4. Filters links based on predefined keywords (`word_0`, `word_1`, `word_2`).
-    5. Applies exclusions (`ti`, `super`, `xt`) based on user input.
-    6. Ensures links do not contain unwanted query strings (`#IsFeed`, `?Item=`).
-    7. Inserts filtered URLs into the database asynchronously.
+     - 1. Connects to a SQLite database (`site.sqlite`) and initializes the `links` table.
+     - 2. Fetches product listings from Newegg using `aiohttp`.
+     - 3. Parses the page with `BeautifulSoup` to extract `<a>` elements.
+     - 4. Filters links based on predefined keywords (`word_0`, `word_1`, `word_2`).
+     - 5. Applies exclusions (`ti`, `super`, `xt`) based on user input.
+     - 6. Ensures links do not contain unwanted query strings (`#IsFeed`, `?Item=`).
+     - 7. Inserts filtered URLs into the database asynchronously.
 
     Notes:
-    - The function assumes `DB_PATH = 'site.sqlite'` as the database location.
-    - Keywords (`word_0`, `word_1`, `word_2`) must be defined globally before calling this function.
-    - Filtering logic ensures **only relevant product links** are stored in the database.
+     - The function assumes `DB_PATH = 'site.sqlite'` as the database location.
+     - Keywords (`word_0`, `word_1`, `word_2`) must be defined globally before calling this function.
+     - Filtering logic ensures **only relevant product links** are stored in the database.
 
     Example Usage:
         >>> await add_to_db(5)  # Scrapes page 5 from Newegg and stores valid links
@@ -209,16 +209,16 @@ async def main():
         asyncio.CancelledError: If any scraping task is interrupted before completion.
 
     Process Overview:
-    1. Calls `get_parameters()` to retrieve user-defined search criteria.
-    2. Iterates over a range from `0` to `number_of_pages` to create scraping tasks.
-    3. Launches each task asynchronously via `add_to_db(numb)`.
-    4. Uses `asyncio.gather()` to execute all tasks concurrently.
-    5. Runs the event loop using `asyncio.run(main())`.
+     - 1. Calls `get_parameters()` to retrieve user-defined search criteria.
+     - 2. Iterates over a range from `0` to `number_of_pages` to create scraping tasks.
+     - 3. Launches each task asynchronously via `add_to_db(numb)`.
+     - 4. Uses `asyncio.gather()` to execute all tasks concurrently.
+     - 5. Runs the event loop using `asyncio.run(main())`.
 
     Notes:
-    - Assumes `number_of_pages` is a valid integer retrieved from `get_parameters()`.
-    - Requires `add_to_db(numb)` to be implemented and working correctly.
-    - Optimized for concurrent execution to speed up data collection.
+     - Assumes `number_of_pages` is a valid integer retrieved from `get_parameters()`.
+     - Requires `add_to_db(numb)` to be implemented and working correctly.
+     - Optimized for concurrent execution to speed up data collection.
 
     Example Usage:
         >>> asyncio.run(main())  # Initiates multiple concurrent scraping tasks.
@@ -231,7 +231,7 @@ async def main():
 
 def fetch():
    """Starts the asynchronous scraping process by running `main()`.
-   
+
       This function ensures the module is importable in buyer.py.
    """
     

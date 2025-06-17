@@ -31,9 +31,9 @@ def is_in_stock():
       - 6. Deletes out-of-stock items from the database.
 
     Note:
-    - The function leverages structured data (`application/ld+json`) for precise stock tracking.
-    - Database entries are modified dynamically based on availability.
-    - Uses optimized Chrome WebDriver settings to improve performance.
+     - The function leverages structured data (`application/ld+json`) for precise stock tracking.
+     - Database entries are modified dynamically based on availability.
+     - Uses optimized Chrome WebDriver settings to improve performance.
 
     Example Usage:
        >>> is_in_stock()  # Scans product links and updates stock status.
