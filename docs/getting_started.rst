@@ -3,19 +3,19 @@ Getting started
 
 Saving a credit card 
 ---------------------
-Before using the bot, you must create an account on Newegg.ca (if you don’t already have one).
+Before using the bot, you must create an account on Newegg.ca (if you don't already have one).
 To ensure the bot can complete checkout, log in and save a credit card to your account.
 
 
 Setting up account.txt
 -----------------------
 Before proceeding, you'll need to set up your credentials. 
-In the root folder of the repository, there is a file named account.txt. 
-Edit account.txt to include the following details:
+Navigate to the root folder of the repository. 
+Edit account.txt and replace the following fields to include these details:
 
- - YOUR_EMAIL: Your Newegg account email  
- - YOUR_PASSWORD: Your Newegg account password  
- - 123: The CVV on the back of your credit card  
+ - YOUR_EMAIL : Your Newegg account email  
+ - YOUR_PASSWORD : Your Newegg account password  
+ - 123 : The CVV on the back of your credit card  
 
 
 Required dependencies

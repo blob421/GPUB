@@ -49,27 +49,8 @@ How It Works
       - Ensures fast transaction handling via Selenium WebDriver for automated form completion.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-Install dependencies (pip install -r requirements.txt).
-
-Configure account credentials in account.txt.
-
-Launch run.bat or buyer.py.
-
-Define search parameters (number of pages & GPU model).
-
-GPUB scans for available GPUs and initiates the fastest possible purchase.
-
 Why Use GPUB?
-In today's competitive GPU market, securing high-demand models can be challenging. GPUB automates the process, ensuring you never miss out on a restock and can secure your GPU before others do
+-------------
+In today's competitive GPU market, securing high-demand models can be challenging. 
+GPUB automates the process, ensuring you never miss out on a restock and can secure your 
+GPU before others do.
