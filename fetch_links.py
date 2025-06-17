@@ -12,34 +12,38 @@ DB_PATH = 'site.sqlite'
 
 
 def get_parameters():
- """
+ def get_parameters():
+    """
     Retrieves search parameters from `parameters.txt` or prompts the user for input.
 
-    This function loads item search parameters (`n`, `item`) from an external file. If the file 
-    is missing, it prompts the user to input values and saves them for future use. It then 
-    extracts keywords from the search string and assigns them to global variables.
+    This function loads item search parameters (`number_of_pages`, `search_string`) from an external file.  
+    If the file is missing, it prompts the user for input, validates the responses, and saves the data  
+    for future use. It then extracts keywords from the search string and assigns them to global variables.
 
     Returns:
         None: Updates global variables but does not return a value.
 
     Raises:
         FileNotFoundError: If `parameters.txt` is missing, user input is requested.
+        ValueError: If an invalid non-numeric entry is provided for `number_of_pages`.
         KeyError: If expected keys (`n`, `item`) are missing from the parameter file.
 
     Process Overview:
-     - 1. Attempts to load `n` (number of pages) and `item` (search keywords) from `parameters.txt`.
-     - 2. If missing, prompts the user to enter search parameters manually.
-     - 3. Saves user input in a dictionary and writes it to `parameters.txt`.
-     - 4. Extracts up to three keywords (`word_0`, `word_1`, `word_2`) for filtering.
-     - 5. Assigns extracted values to global variables.
+     - 1. Attempts to load `number_of_pages` and `search_string` from `parameters.txt`.
+     - 2. If missing, prompts the user to enter a valid number of pages (integer).
+     - 3. Prompts the user to enter the GPU search term and confirms input validity.
+     - 4. Saves the validated parameters in a dictionary and writes them to `parameters.txt`.
+     - 5. Extracts up to three keywords (`word_0`, `word_1`, `word_2`) for filtering.
 
     Notes:
      - `parameters.txt` must be formatted as a YAML dictionary.
      - If fewer than three keywords are provided, missing values default to `None`.
+     - User input for `number_of_pages` is validated to prevent non-numeric entries.
+     - Ensures proper formatting for search terms before storing them.
 
     Example Usage:
-        >>> get_parameters()  # Loads parameters, initializes global variables
- """
+        >>> get_parameters()  # Loads parameters, validates input, and initializes global variables.
+    """
  global number_of_pages, search_string, word_0, word_1, word_2
 
  try:
@@ -50,10 +54,26 @@ def get_parameters():
       search_string = parameters["item"]
 
 
- except FileNotFoundError:
+ except FileNotFoundError:  
+    while True:   
+     
+      try:
+        number_of_pages = int(input("How many pages to search (0-10)? 3 is recommended: "))
+        break 
+   
+      except ValueError:
+        print("This is not a valid number, try again.")
+
     
-    number_of_pages = input('How many pages to search (0-10) ? 3 is recommended : ')
-    search_string = input('What are you looking for ? (6700 xt , tuf 5080 ti, 4070 ti super, astral) : ')
+    
+    while True:
+     search_string = input('What are you looking for ? (6700 xt , tuf 5080 ti, 4070 ti super, astral) : ')
+     proceed = input(f'Confirm search for : {search_string} ? Input (y) or (n) ')
+   
+     if proceed.lower() == 'y':
+       break
+    
+
     parameters = dict()
     parameters["n"] = number_of_pages
     parameters["item"] = search_string
@@ -240,7 +260,7 @@ def fetch():
 
 
 #cProfile.run("fetch()")
-
+fetch()
 
  
 

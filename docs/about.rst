@@ -24,7 +24,10 @@ How It Works
 -------------
 
 - 1. Retrieving Search Parameters: 
+
       - GPUB loads user-defined search criteria (GPU model and pages to scan) from parameters.txt.
+  
+      - Validates the user's choice and prevents typos when inputing a number.
 
 - 2. Asynchronous Scraping:
 

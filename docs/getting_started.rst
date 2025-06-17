@@ -47,7 +47,7 @@ Starting GPUB
     - tuf 5070 ti 
     - 5070 ti super 
     - xfx 6700 xt  
-    - TUF 5080 ,
+    - TUF 5080
     - 6800
 
 - 4. When the bot finds an in-stock GPU, it will display its price and attempt to purchase the 
