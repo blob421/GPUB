@@ -235,6 +235,7 @@ def delete():
     Example Usage:
         delete()  # Stops browser automation and cleans up temporary data.
   """
+  global driver
   driver.quit()
   #os.system("taskkill /f /im chrome.exe")  # disabled for headless-mode
   if os.path.exists("parameters.txt"):
