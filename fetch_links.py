@@ -12,8 +12,8 @@ DB_PATH = 'site.sqlite'
 
 
 def get_parameters():
- def get_parameters():
-    """
+
+ """
     Retrieves search parameters from `parameters.txt` or prompts the user for input.
 
     This function loads item search parameters (`number_of_pages`, `search_string`) from an external file.  
@@ -43,7 +43,7 @@ def get_parameters():
 
     Example Usage:
         >>> get_parameters()  # Loads parameters, validates input, and initializes global variables.
-    """
+ """
  global number_of_pages, search_string, word_0, word_1, word_2
 
  try:
@@ -260,7 +260,6 @@ def fetch():
 
 
 #cProfile.run("fetch()")
-fetch()
 
  
 
