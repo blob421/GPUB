@@ -6,3 +6,4 @@ stock\_checker
    :show-inheritance:
    :undoc-members:
    :private-members:
+   :all:

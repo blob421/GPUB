@@ -4,20 +4,8 @@ from bs4 import BeautifulSoup
 import sqlite3
 import re
 
-def checker():
- """
-    Wrapper function that initializes a stock-checking process for stored product links by
-    calling is_in_stock().
-    
-    This function connects to a SQLite database, retrieves product URLs, and determines 
-    stock availability using Selenium WebDriver and BeautifulSoup. Out-of-stock items 
-    are automatically removed from the database.
 
-    Example Usage:
-       >>> checker()  # Runs inventory check and updates product availability.
-    """
-
- def is_in_stock():
+def is_in_stock():
   """
     Checks product availability for stored links and updates the database accordingly.
 
@@ -50,6 +38,7 @@ def checker():
     Example Usage:
        >>> is_in_stock()  # Scans product links and updates stock status.
   """
+  
   # Database init 
 
   conn = sqlite3.connect("site.sqlite")
@@ -58,12 +47,9 @@ def checker():
 
   cursor.execute('SELECT links FROM links')
 
-  all_links = cursor.fetchall() #fetch from db all links 
+  all_links = cursor.fetchall() 
 
-
-  # Check if in stock function
-  #count = 0
-
+  # Chrome options
 
   chrome_options = Options()
   chrome_options.add_argument("--headless=new")
@@ -76,6 +62,8 @@ def checker():
   chrome_options.add_argument("--log-level=3")
   chrome_options.add_argument("--output=/dev/null")
   
+  # Stock checker
+
   with webdriver.Chrome(options=chrome_options) as driver:
 
     for link in all_links:
@@ -89,32 +77,34 @@ def checker():
  
      scripts = soup.find_all("script", {"type": "application/ld+json"}) 
    
-     for script in scripts:
-         
+     for script in scripts:         
            script_text = script.string
 
            if "InStock" in script_text:
              found = True
              match = re.search(r'"price":"([\d\.]+)"', script_text)
+            
              if match:
-                sell_price = match.group(1)  # Extract the price value
+                sell_price = match.group(1)  # Extracts the price value
                 break
-              
-         
+                    
      if found == True:
         print(f"Found one at ${sell_price}")   
-       # count += 1
+      
      else: 
         print('Out of stock')
         cursor.execute('DELETE FROM links WHERE links = ?', (url,))
         
-       
-
+      
     conn.commit()
     cursor.close()  
     conn.close()           
-   
       
 
- is_in_stock()
+def checker():
+   """Starts the stock-checking process by running `is_in_stock()`.
+   
+      This function ensures the module is importable in buyer.py.
+   """
+   is_in_stock()
    

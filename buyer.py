@@ -219,8 +219,6 @@ def buy():
   print("Nothing was bought")
   print("Waiting...")
   
-  
-
 ## Deletes parameters.txt when exiting 
 
 def delete():
@@ -241,11 +239,8 @@ def delete():
    os.remove("parameters.txt")
    
    
-
-
-atexit.register(delete)
-
 ## Main program
+atexit.register(delete)
 
 ## Will run in headless mode 
 chrome_options = Options()
