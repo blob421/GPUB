@@ -13,40 +13,72 @@ from stock_checker import checker
 import atexit
 
 
-def buy():
- """
-    Automates the purchase of a product from Newegg using Selenium.
+def load_parameters():
+   """
+    Loads user credentials from 'account.txt' into global variables.
 
-    This function connects to a SQLite database to retrieve available product links, 
-    verifies stock availability, and proceeds through the checkout process using Selenium WebDriver. 
-    It handles authentication, adds items to the cart, enters payment details, and attempts to confirm 
-    the order.
-
-    Returns:
-        None: The function modifies the database and interacts with the web interface, but does not return a value.
+    Reads email, password, and CVV from a JSON-formatted credentials file 
+    and assigns them to global variables for authentication use.
 
     Raises:
-        sqlite3.DatabaseError: If database queries fail.
-        selenium.common.exceptions.TimeoutException: If an element fails to load within the expected time.
-        selenium.common.exceptions.WebDriverException: If the Chrome WebDriver encounters an issue.
-        json.JSONDecodeError: If `account.txt` contains malformed JSON.
-
-    Process Overview:
-       - 1. Connects to `site.sqlite` and retrieves stored product links.
-       - 2. Checks for availability and skips items that are out of stock.
-       - 3. Uses Selenium to navigate to the product page and add items to the cart.
-       - 4. Handles login authentication using stored credentials (`account.txt`).
-       - 5. Proceeds through the checkout process, entering CVV and confirming the order.
-       - 6. Removes out-of-stock items from the database.
+      - FileNotFoundError: If 'account.txt' does not exist.
+      - json.JSONDecodeError: If the file content is not valid JSON.
+      - KeyError: If expected keys ('email', 'password', 'cvv') are missing.
 
     Note:
-       - Requires Chrome WebDriver with appropriate configurations (`--headless`, `--disable-logging`, etc.).
-       - Assumes user credentials (`email`, `password`, `cvv`, `card_number`) are stored in `account.txt`.
-       - Filtering logic ensures only relevant and available products are purchased.
+      - This function mutates global state and assumes the presence of valid keys in the credentials file.
+   """
+   global email, password, cvv
+   with open("account.txt", "r") as credentials:
+    data = json.load(credentials)
+    email = data["email"]
+    password = data["password"]
+    cvv = data["cvv"]
+  
+
+def buy(email, password, cvv):
+ """
+    Automates the process of purchasing a product from Newegg using Selenium WebDriver.
+
+    This function connects to a local SQLite database to retrieve product links, checks stock availability,
+    and completes the checkout process using user credentials and CVV input. It handles cart interactions,
+    form submission, and basic exception handling, aiming to finalize the transaction if an item is available.
+
+    Args:
+      - email (str): User's Newegg account email.
+      - password (str): Corresponding account password.
+      - cvv (str): 3-digit security code for the credit card on file.
+
+    Returns:
+        None
+
+    Raises:
+      - sqlite3.DatabaseError: If there is an issue reading from the product link database.
+      - selenium.common.exceptions.TimeoutException: If page elements fail to load.
+      - selenium.common.exceptions.WebDriverException: If the Selenium WebDriver fails.
+      - json.JSONDecodeError: If account information in `account.txt` is improperly formatted.
+
+    Flow:
+      - 1. Connects to `site.sqlite` and retrieves stored product URLs.
+      - 2. For each URL:
+            - Loads product page.
+            - Attempts to add item to cart.
+            - Skips unavailable or error-prone products.
+      - 3. Navigates to the cart and initiates the checkout.
+      - 4. If not logged in:
+            - Submits email and password.
+      - 5. Inputs CVV and confirms order.
+      - 6. Stops execution if a purchase is successful or skips to next if unsuccessful.
+
+    Notes:
+      - Requires a headless Chrome WebDriver.
+      - Assumes account details are stored in `account.txt`.
+      - Uses global flags (`bought`, `error`, `connected`) for external status signaling.
+      - Designed for repeated execution in purchasing loops.
 
     Example:
-       >>> buy()  # Executes the automated purchasing process.
- """
+       >>> buy("user@example.com", "hunter2", "123")
+    """
 
  global bought, error, connected
  
@@ -74,27 +106,9 @@ def buy():
   return
 
 
- """quantity = how_many.split()
- qty1 = int(quantity[0])
-
- try:
-  qty2 = int(quantity[1])
-
- except IndexError:
-  qty2 = int(quantity[0])"""
-
- 
- with open("account.txt", "r") as credentials:
-  
-  data = json.load(credentials)
-  email = data["email"]
-  password = data["password"]
-  cvv = data["cvv"]
-  card_number = data["card_number"]
-
 ## Add to cart and skips warranty , skips if not in stock 
   
-  for link in all_links:#[qty1 -1:qty2]:
+ for link in all_links:#[qty1 -1:qty2]:
     url = link[0]
     driver.get(url)
 
@@ -107,7 +121,7 @@ def buy():
      
     
      button = WebDriverWait(driver, 10).until(
-     EC.element_to_be_clickable((By.XPATH, "//*[@id='modal-intermediary']/div/div/div/div[4]/button[1]"))
+     EC.element_to_be_clickable((By.XPATH, "//*[@id='modal-intermediary']/div/div/div/div[3]/button[1]"))
       )
      button.click()
    
@@ -216,8 +230,8 @@ def buy():
     last.click()"""
   ## IF nothing was bought 
   
-  print("Nothing was bought")
-  print("Waiting...")
+ print("Nothing was bought")
+ print("Waiting...")
   
 ## Deletes parameters.txt when exiting 
 
@@ -259,40 +273,37 @@ driver = webdriver.Chrome(options=chrome_options)
 connected = 0
 bought = 0
 error = 0
+email = None
+password = None
+cvv = None
 
 
 def buy_main():
  """
-    Continuously executes product retrieval, stock checking, and purchasing automation.
+    Repeatedly automates GPU purchasing until success or error.
 
-    This function runs an infinite loop that sequentially:
-      - 1. Fetches product listings from Newegg.
-      - 2. Checks their stock availability.
-      - 3. Attempts to purchase available items.
-      - 4. If a purchase is successful (`bought == 1`), it cleans up and exits.
-      - 5. If an error occurs (`error == 1`), it performs cleanup and exits.
-      - 6. Otherwise, it waits 5 minutes before repeating the cycle.
-
-    Returns:
-        None: The function runs indefinitely until a purchase or error triggers exit.
+    Executes an infinite loop to fetch product listings, check stock, and initiate
+    automated purchases. On success or failure, it performs cleanup and exits.
 
     Raises:
-        SystemExit: If a GPU is successfully bought or an error occurs.
-    
-    Note:
-     - Runs continuously until an item is purchased or an error occurs.
-     - The cleanup process (`delete()`) ensures browser shutdown and removal of temporary files.
-     - Optimized for repeated execution at 5-minute intervals.
+      - SystemExit: When a GPU is purchased or an unrecoverable error occurs.
+
+    Notes:
+      - Calls supporting functions: fetch(), checker(), buy().
+      - Waits 5 minutes between cycles if no purchase is made.
+      - Ensures cleanup via delete() before termination.
 
     Example:
-       >>> buy_main()  # Initiates automated purchasing loop.
+        >>> buy_main()
  """
  global bought, error
+ load_parameters()
+
  while True:
   
   fetch()
   checker()
-  buy()
+  buy(email, password, cvv)
   
   if bought == 1:
    delete()
