@@ -37,7 +37,7 @@ This program requires Python.
 
 Starting GPUB
 ---------------
-- 1. Launch run.bat or buyer.py. 
+- 1. Launch run.bat or buyer.py. (Preferably 5 minutes before a release so the bot is logged-in)
 
 - 2. The program will ask for the number of pages to scan, 3-4 is recommended. Input a number 
      and press enter.

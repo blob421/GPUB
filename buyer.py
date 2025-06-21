@@ -13,7 +13,7 @@ from stock_checker import checker
 import atexit
 
 
-def load_parameters():
+def load_credentials():
    """
     Loads user credentials from 'account.txt' into global variables.
 
@@ -297,7 +297,7 @@ def buy_main():
         >>> buy_main()
  """
  global bought, error
- load_parameters()
+ load_credentials()
 
  while True:
   
