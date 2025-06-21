@@ -49,7 +49,9 @@ Starting GPUB
    - xfx 6700 xt   
    - TUF 5080
    - 6800
+   
+- 4. If you are using GPUB at a release, be more specific e.g. TUF 6070 rather than just 6070.
 
-- 4. When the bot finds an in-stock GPU, it will display its price and attempt to purchase the 
+- 5. When the bot finds an in-stock GPU, it will display its price and attempt to purchase the 
      first one available. If someone was quicker , it'll try the other ones.
  
