@@ -50,8 +50,13 @@ Starting GPUB
    - TUF 5080
    - 6800
    
-- 4. If you are using GPUB at a release, be more specific e.g. TUF 6070 rather than just 6070.
+- 4. If you're using GPUB for a release, you can pre-configure your search criteria by 
+     creating a parameters.txt file in the root directory. Make sure it follows this format:
+     
+       - {"item": "Tuf 6070", "n": 3}
+       
+     Be more specific if you want to prioritize speed e.g. TUF 6070 rather than just 6070. 
 
-- 5. When the bot finds an in-stock GPU, it will display its price and attempt to purchase the 
+- 5. When the bot finds in-stock GPUs, it will display their prices and attempt to purchase the 
      first one available. If someone was quicker , it'll try the other ones.
  
