@@ -53,7 +53,7 @@ Starting GPUB
 - 4. If you're using GPUB for a release, you can pre-configure your search criteria by 
      creating a parameters.txt file in the root directory. Make sure it follows this format:
      
-     - {"item": "Tuf 6070", "n": 3}
+      - {"item": "Tuf 6070", "n": 3}
        
      Be more specific if you want to prioritize speed e.g. TUF 6070 rather than just 6070. 
 
