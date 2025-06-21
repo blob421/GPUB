@@ -44,11 +44,11 @@ Starting GPUB
 
 - 3. The program will asks for a GPU model, the spacing is important. E.g.: 
 
-   - tuf 5070 ti 
-   - 5070 ti super 
-   - xfx 6700 xt   
-   - TUF 5080
-   - 6800
+       - tuf 5070 ti 
+       - 5070 ti super 
+       - xfx 6700 xt   
+       - TUF 5080
+       - 6800
    
 - 4. If you're using GPUB for a release, you can pre-configure your search criteria by 
      creating a parameters.txt file in the root directory. Make sure it follows this format:
