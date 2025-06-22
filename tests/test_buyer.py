@@ -9,13 +9,18 @@ import json
 
 def test_buy():
  
- with open("account.txt", "r") as credentials:
+ try: 
+ 
+  with open("account.txt", "r") as credentials:
     data = json.load(credentials)
     email = data["email"]
     password = data["password"]
     cvv = data["cvv"]
   
-
+ except:
+   raise Exception('Invalid credentials in account.txt')
+ 
+ 
  # Database init 
 
  with sqlite3.connect("site.sqlite") as conn:
