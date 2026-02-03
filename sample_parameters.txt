@@ -1,0 +1,14 @@
+
+
+{'n': 2, 'item': '5070 ti', 'breakpoint': 1}
+
+
+Explanation: 
+
+n: Search 2 pages of 36 GPUs starting from the first
+
+item: keyword to search 
+
+breakpoint: When 1 is found to be in stock , skips availability checks and proceeds 
+to purchasing immediately. Can speed up the process but won't have a failover if someone 
+was quicker and 2 were in stock.

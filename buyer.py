@@ -300,22 +300,28 @@ def buy_main():
  load_credentials()
 
  while True:
-  
-  fetch()
-  checker()
-  buy(email, password, cvv)
-  
-  if bought == 1:
-   delete()
-   os._exit(0)
+  try:
+    breakpoint = fetch()
+    print(f'breakpoint is {breakpoint}')
+    checker(breakpoint)
+    buy(email, password, cvv)
+    
+    if bought == 1:
+     delete()
+     os._exit(0)
 
-  if error == 1:
-   delete()
-   os._exit(0)
- 
-  else:
-   time.sleep(300)
-
+    if error == 1:
+     delete()
+     os._exit(0)
+  
+    else:
+     time.sleep(300)
+     
+  except KeyboardInterrupt:
+    print("Program exiting ...")
+    delete()
+    os._exit(0)
+  
 if __name__ == '__main__':
  buy_main()
   

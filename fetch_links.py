@@ -44,7 +44,7 @@ def get_parameters():
     Example Usage:
         >>> get_parameters()  # Loads parameters, validates input, and initializes global variables.
  """
- global number_of_pages, search_string, word_0, word_1, word_2
+ global number_of_pages, search_string, word_0, word_1, word_2, breakpoint
 
  try:
    
@@ -52,6 +52,7 @@ def get_parameters():
       parameters = yaml.safe_load(file.read())
       number_of_pages = parameters["n"]
       search_string = parameters["item"]
+      breakpoint = parameters["breakpoint"]
 
 
  except FileNotFoundError:  
@@ -64,19 +65,29 @@ def get_parameters():
       except ValueError:
         print("This is not a valid number, try again.")
 
-    
-    
     while True:
      search_string = input('What are you looking for ? (6700 xt , tuf 5080 ti, 4070 ti super, astral) : ')
      proceed = input(f'Confirm search for : {search_string} ? Input (y) or (n) ')
    
      if proceed.lower() == 'y':
        break
+         
     
+    while True:
+      try:
+        breakpoint = int(input('Buy as soon as how many are found In Stock ? (1 for speed , > 1 for luck)'))
+      except ValueError:
+        print("This is not a valid number, try again.")
+
+      proceed = input(f'Buy when "{breakpoint}" available ? Input (y) or (n) ')
+   
+      if proceed.lower() == 'y':
+        break
 
     parameters = dict()
     parameters["n"] = number_of_pages
     parameters["item"] = search_string
+    parameters['breakpoint'] = breakpoint
     
     with open("parameters.txt", "w") as file:
        file.write(str(parameters))
@@ -256,6 +267,7 @@ def fetch():
    """
     
    asyncio.run(main())
+   return int(breakpoint)
  
 
 

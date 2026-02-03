@@ -5,7 +5,9 @@ import sqlite3
 import re
 
 
-def is_in_stock():
+
+
+def is_in_stock(breakpoint):
   """
     Checks product availability for stored links and updates the database accordingly.
 
@@ -40,7 +42,7 @@ def is_in_stock():
   """
   
   # Database init 
-
+  
   conn = sqlite3.connect("site.sqlite")
 
   cursor = conn.cursor()
@@ -63,7 +65,7 @@ def is_in_stock():
   chrome_options.add_argument("--output=/dev/null")
   
   # Stock checker
-
+  n_in_stock = 0
   with webdriver.Chrome(options=chrome_options) as driver:
 
     for link in all_links:
@@ -89,7 +91,10 @@ def is_in_stock():
                 break
                     
      if found == True:
-        print(f"Found one at ${sell_price}")   
+         print(f"Found one at ${sell_price}")   
+         n_in_stock += 1
+         if n_in_stock >= breakpoint:
+            return 
       
      else: 
         print('Out of stock')
@@ -101,10 +106,10 @@ def is_in_stock():
     conn.close()           
       
 
-def checker():
+def checker(breakpoint):
    """Starts the stock-checking process by running `is_in_stock()`.
    
       This function ensures the module is importable in buyer.py.
    """
-   is_in_stock()
+   is_in_stock(breakpoint)
    
