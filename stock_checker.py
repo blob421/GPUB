@@ -7,7 +7,7 @@ import re
 
 
 
-def is_in_stock(breakpoint):
+def is_in_stock(breakpoint, max_price):
   """
     Checks product availability for stored links and updates the database accordingly.
 
@@ -91,6 +91,11 @@ def is_in_stock(breakpoint):
                 break
                     
      if found == True:
+         if float(sell_price) > float(max_price):
+            print("To pricy ...")
+            cursor.execute('DELETE FROM links WHERE links = ?', (url,))
+            continue
+         
          print(f"Found one at ${sell_price}")   
          n_in_stock += 1
          if n_in_stock >= breakpoint:
@@ -106,10 +111,10 @@ def is_in_stock(breakpoint):
     conn.close()           
       
 
-def checker(breakpoint):
+def checker(breakpoint, max_price):
    """Starts the stock-checking process by running `is_in_stock()`.
    
       This function ensures the module is importable in buyer.py.
    """
-   is_in_stock(breakpoint)
+   is_in_stock(breakpoint, max_price)
    

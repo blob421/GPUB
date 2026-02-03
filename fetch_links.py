@@ -44,7 +44,7 @@ def get_parameters():
     Example Usage:
         >>> get_parameters()  # Loads parameters, validates input, and initializes global variables.
  """
- global number_of_pages, search_string, word_0, word_1, word_2, breakpoint
+ global number_of_pages, search_string, word_0, word_1, word_2, breakpoint, max_price
 
  try:
    
@@ -53,9 +53,11 @@ def get_parameters():
       number_of_pages = parameters["n"]
       search_string = parameters["item"]
       breakpoint = parameters["breakpoint"]
+      max_price = parameters["max_price"]
 
-
+####### PARAMETERS INPUTS #########
  except FileNotFoundError:  
+    
     while True:   
      
       try:
@@ -72,7 +74,19 @@ def get_parameters():
      if proceed.lower() == 'y':
        break
          
-    
+
+    while True:
+      try:
+        max_price = int(input('Enter a price limit (E.g. 1999)'))
+      except ValueError:
+        print("This is not a valid number, try again.")
+
+      proceed = input(f'Confirm price limit of "${max_price}" ? Input (y) or (n) ')
+   
+      if proceed.lower() == 'y':
+        break
+
+
     while True:
       try:
         breakpoint = int(input('Buy as soon as how many are found In Stock ? (1 for speed , > 1 for luck)'))
@@ -88,7 +102,8 @@ def get_parameters():
     parameters["n"] = number_of_pages
     parameters["item"] = search_string
     parameters['breakpoint'] = breakpoint
-    
+    parameters['max_price'] = max_price
+
     with open("parameters.txt", "w") as file:
        file.write(str(parameters))
     
@@ -267,7 +282,7 @@ def fetch():
    """
     
    asyncio.run(main())
-   return int(breakpoint)
+   return {"breakpoint": int(breakpoint), "price_limit": int(max_price)}
  
 
 

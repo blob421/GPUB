@@ -301,9 +301,9 @@ def buy_main():
 
  while True:
   try:
-    breakpoint = fetch()
-    print(f'breakpoint is {breakpoint}')
-    checker(breakpoint)
+    params = fetch()
+    
+    checker(params["breakpoint"], params["price_limit"])
     buy(email, password, cvv)
     
     if bought == 1:
