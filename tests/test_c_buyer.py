@@ -9,18 +9,13 @@ import json
 
 def test_buy():
  
- try: 
- 
-  with open("account.txt", "r") as credentials:
+ with open("account.txt", "r") as credentials:
     data = json.load(credentials)
     email = data["email"]
     password = data["password"]
     cvv = data["cvv"]
-  
- except:
-   raise Exception('Invalid credentials in account.txt')
- 
- 
+    first_use = data["first_use_of_credit_card"]
+
  # Database init 
 
  with sqlite3.connect("site.sqlite") as conn:
@@ -30,6 +25,7 @@ def test_buy():
   cursor.execute('SELECT links FROM links')
 
   all_links = cursor.fetchall()
+  print(all_links)
   
   url = all_links[0][0]
 
@@ -72,7 +68,7 @@ def test_buy():
     if connected == 0:
      
     
-      time.sleep(1)
+      time.sleep(1.4)
       email_input = driver.find_element(By.ID, "labeled-input-signEmail")
       assert email_input.is_displayed() and email_input.is_enabled()
       email_input.send_keys(email)
@@ -125,6 +121,20 @@ def test_buy():
      except:
       pass
      
+     if first_use == 'True':
+      try:
+    
+          modal = WebDriverWait(driver, 3).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, ".modal.fade.show"))
+  )
+  
+        
+          if modal:
+              print("Newegg is asking for credit card verification.")
+              print("Please complete the verification manually in the browser window.")
+              input("Press Enter once verification is complete...")
+      except:
+          pass
      #Order confirmation disabled for testing
      """
      confirm_order_button = WebDriverWait(driver, 10).until(
@@ -142,7 +152,7 @@ def test_buy():
 
 ## Will run in headless mode 
 chrome_options = Options()
-chrome_options.add_argument("--headless=new")  # comment to disable
+#chrome_options.add_argument("--headless=new")  # comment to disable
 chrome_options.add_argument("--disable-crash-reporter")
 chrome_options.add_argument("--disable-logging")
 chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])

@@ -11,16 +11,17 @@ import aiosqlite
 DB_PATH = 'site.sqlite'
 
 #Mocking parameters
-search_string = "TUF 5070 ti"
-word_0 = "TUF"
-word_1 = "5070"
-word_2 = "ti"
+search_string = "5070"
+
+word_0 = "5070"
+word_1 = None
+word_2 = None
 number_of_pages = 1 
 
 
 async def add_to_db(n):
  
-
+  n = 1
   # Database init
   conn = sqlite3.connect('site.sqlite')
   cursor = conn.cursor()

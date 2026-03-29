@@ -3,8 +3,19 @@ Getting started
 
 Saving a credit card 
 ---------------------
-Before using the bot, you must create an account on Newegg.ca (if you don't already have one).
+Before using GPUB, you must create an account on Newegg.ca (if you don't already have one).
 To ensure the bot can complete checkout, log in and save a credit card to your account.
+It is recommended to use this payment method at least once before using this bot . 
+
+If you've just added this payment method : 
+
+- Newegg will ask you to confirm your credit card number before payment.
+- Enter it in the chrome tab when asked and click confirm. 
+- Press enter in your python terminal to resume .
+
+If you've already used this credit card : 
+
+- Change "first_use_of_credit_card": True  to "first_use_of_credit_card": "False" in account.txt.
 
 
 Setting up account.txt

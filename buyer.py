@@ -12,6 +12,7 @@ from fetch_links import fetch
 from stock_checker import checker
 import atexit
 
+first_use = None
 
 def load_credentials():
    """
@@ -28,12 +29,13 @@ def load_credentials():
     Note:
       - This function mutates global state and assumes the presence of valid keys in the credentials file.
    """
-   global email, password, cvv
+   global email, password, cvv, first_use
    with open("account.txt", "r") as credentials:
     data = json.load(credentials)
     email = data["email"]
     password = data["password"]
     cvv = data["cvv"]
+    first_use = data["first_use_of_credit_card"]
   
 
 def buy(email, password, cvv):
@@ -153,7 +155,7 @@ def buy(email, password, cvv):
     if connected == 0:
      
      try:
-      time.sleep(1)
+      time.sleep(1.4)
       email_input = driver.find_element(By.ID, "labeled-input-signEmail")
       email_input.send_keys(email)
   
@@ -201,6 +203,21 @@ def buy(email, password, cvv):
      
      except:
       pass
+     
+     if first_use == 'True':
+      try:
+    
+          modal = WebDriverWait(driver, 3).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, ".modal.fade.show"))
+  )
+  
+        
+          if modal:
+              print("Newegg is asking for credit card verification.")
+              print("Please complete the verification manually in the browser window.")
+              input("Press Enter once verification is complete...")
+      except:
+          pass
      
      confirm_order_button = WebDriverWait(driver, 10).until(
      EC.element_to_be_clickable((By.CLASS_NAME, "bg-orange")))
@@ -258,7 +275,7 @@ atexit.register(delete)
 
 ## Will run in headless mode 
 chrome_options = Options()
-chrome_options.add_argument("--headless=new")  # comment to disable
+#chrome_options.add_argument("--headless=new")  # comment to disable
 chrome_options.add_argument("--disable-crash-reporter")
 chrome_options.add_argument("--disable-logging")
 chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])

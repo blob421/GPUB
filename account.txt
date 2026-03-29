@@ -2,4 +2,5 @@
  "email": "YOUR_EMAIL", 
  "password": "YOUR_PASSWORD",
  "cvv": "123",
+ "first_use_of_credit_card": "True"
 }
