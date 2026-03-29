@@ -50,24 +50,29 @@ Starting GPUB
 ---------------
 - 1. Launch run.bat or buyer.py.  (Preferably 5 minutes before a release so the bot is logged-in)
 
-- 2. The program will ask for the number of pages to scan, 3-4 is recommended. Input a number 
+- 2 The program will ask for the number of pages to scan (n), 3-4 is recommended. Input a number 
      and press enter.
 
-- 3. The program will asks for a GPU model, the spacing is important. E.g.: 
+- 3. The program will asks for a GPU model (item), the spacing is important. E.g.: 
 
     - tuf 5070 ti 
     - 5070 ti super 
     - xfx 6700 xt   
     - TUF 5080
     - 6800
-   
-- 4. If you're using GPUB for a release, you can pre-configure your search criteria by 
+
+- 4. (breakpoint): When 1 is found to be in stock , skips availability checks and proceeds 
+            to purchasing immediately. Can speed up the process but won't have a failover 
+            if someone was quicker and 2 were in stock.
+
+
+- 5. If you're using GPUB for a release, you can pre-configure your search criteria by 
      creating a parameters.txt file in the root directory. Make sure it follows this format:
      
-      - {"item": "Tuf 6070", "n": 3}
+      - {'n': 2, 'item': '5070 ti', 'breakpoint': 1, max_price: 1999}
        
      Be more specific if you want to prioritize speed e.g. TUF 6070 rather than just 6070. 
 
-- 5. When the bot finds in-stock GPUs, it will display their prices and attempt to purchase the 
+- 6. When the bot finds in-stock GPUs, it will display their prices and attempt to purchase the 
      first one available. If someone was quicker , it'll try the other ones.
  
