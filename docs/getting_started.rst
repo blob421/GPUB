@@ -7,15 +7,16 @@ Before using GPUB, you must create an account on Newegg.ca (if you don't already
 To ensure the bot can complete checkout, log in and save a credit card to your account.
 It is recommended to use this payment method at least once before using this bot . 
 
-If you've just added this payment method : 
+- If you've just added this payment method : 
 
-- Newegg will ask you to confirm your credit card number before payment.
-- Enter it in the chrome tab when asked and click confirm. 
-- Press enter in your python terminal to resume .
+   1. Newegg will ask you to confirm your credit card number before payment.
+   2. Enter it in the chrome tab when asked and click confirm. 
+   3. Press enter in your python terminal to resume .
 
-If you've already used this credit card : 
+- If you've already used this credit card : 
 
-- Change "first_use_of_credit_card": True  to "first_use_of_credit_card": "False" in account.txt.
+   1. In account.txt
+   2. Change "first_use_of_credit_card": "True" to "first_use_of_credit_card": "False" .
 
 
 Setting up account.txt
@@ -41,16 +42,16 @@ This program requires Python.
 
 - With your python environment activated in the terminal:
 
-   - 1. Navigate to the directory where `requirements.txt` is located. e.g. cd /desktop/project
+   1. Navigate to the directory where `requirements.txt` is located. e.g. cd /desktop/project
 
-   - 2. pip install -r requirements.txt 
+   2. pip install -r requirements.txt 
 
 
 Starting GPUB
 ---------------
 - 1. Launch run.bat or buyer.py.  (Preferably 5 minutes before a release so the bot is logged-in)
 
-- 2 The program will ask for the number of pages to scan (n), 3-4 is recommended. Input a number 
+- 2. The program will ask for the number of pages to scan (n), 3-4 is recommended. Input a number 
      and press enter.
 
 - 3. The program will asks for a GPU model (item), the spacing is important. E.g.: 
