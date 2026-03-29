@@ -4,8 +4,13 @@ Getting started
 Saving a credit card 
 ---------------------
 Before using GPUB, you must create an account on Newegg.ca (if you don't already have one).
-To ensure the bot can complete checkout, log in and save a credit card to your account.
-It is recommended to use this payment method at least once before using this bot . 
+
+- To ensure the bot can complete checkout: 
+
+   1. Log in and save a credit card to your account, set as default.
+   2. Add a delivery address and save as default. 
+
+It is highly recommended to use this payment method at least once before using this bot . 
 
 - If you've just added this payment method : 
 
@@ -62,9 +67,9 @@ Starting GPUB
     - TUF 5080
     - 6800
 
-- 4. (breakpoint): When 1 is found to be in stock , skips availability checks and proceeds 
-            to purchasing immediately. Can speed up the process but won't have a failover 
-            if someone was quicker and 2 were in stock.
+- 4. The program will ask for a breakpoint . If breakpoint = 1 , When 1 is found to be in stock , skips availability checks and proceeds 
+     to purchasing immediately. Can speed up the process but won't have a failover 
+     if someone was quicker and 2 were in stock.
 
 
 - 5. If you're using GPUB for a release, you can pre-configure your search criteria by 
